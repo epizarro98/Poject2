@@ -20,12 +20,26 @@ cloudinary.config(process.env.CLOUDINARY_URL)
 
 
 app.use(session({
-    secret: 'keyboard cat',
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true
 }))
 
+// passport middleware
+app.use(passport.initialize())
+app.use(passport.session())
+
+// flash middleware
+app.use(flash())
+
+// CUSTOM MIDDLEWARE
+app.use((req, res, next)=>{
+    // before every route, attach the flash messsages and current user to res.locals
+    // this will give us access to these values in all our ejs pages
+    res.locals.alerts = req.flash()
+    res.locals.currentUser = req.user
+    next() // move on to the next piece of middleware
+})
 
 app.get('/', function(req, res) {
     res.render('home', { image: imgUrl });
@@ -102,10 +116,12 @@ app.get('/category/:id', (req, res)=>{
     })
 })
 
-
+app.get('/profile', isLoggedIn, (req, res)=>{
+    res.render('profile')
+})
 
 
 //============================
-app.listen(3000, ()=>{
-    console.log('youre now in port 3000')
+app.listen(process.env.PORT, ()=>{
+    console.log('you\'re listening to the spooky sounds of port 3000')
 })
