@@ -17,6 +17,9 @@ cloudinary.config(process.env.CLOUDINARY_URL)
 
 
 
+
+
+
 app.get('/', function(req, res) {
     res.render('home', { image: imgUrl });
   });
@@ -52,10 +55,10 @@ app.get('/', (req, res)=>{
 })
 
 // THIS ROUTE WILL BE FOR CATEGORIZED MAIL ONCE WE GET CLOUDINARY TO STOP PLAYIN
-app.get('/', (req, res)=>{
-    // res.send('EXPRESS AUTH HOME ROUTE')
-    res.render('category')
-})
+// app.get('/', (req, res)=>{
+//     // res.send('EXPRESS AUTH HOME ROUTE')
+//     res.render('category')
+// })
 
 //============================
 
@@ -71,18 +74,20 @@ app.get('/', (req, res)=>{
 //     })
 // })
 
-app.get('/:id', (req, res)=>{
+app.get('/category/:id', (req, res)=>{
     // res.send('hellooooooooo')
-    console.log(req.params.id)
-    db.category.findOne({
-        where: {id: req.params.id},
-        include: [db.mail]
+    // console.log(req.params.id)
+    console.log(mailStorage)
+    db.category.findOrCreate({ //make findOrCreate to give 
+        where: {id: req.params.id} 
+        // include: [db.mails]
     })
     .then((category)=>{
-        console.log(category)
         //render category show page, pass in category to res.render in the show page
-        if (!category) throw Error()
-        res.render('category', {category: category, user: category.user})
+        // if (!category) {
+        //     res.redirect('/')
+        // }
+        res.render('category', {category: category, mails: category.mails})
         // res.send('hello')
     })
     .catch(err =>{
