@@ -7,7 +7,10 @@ let multer = require('multer');
 const db = require('./models/index.js');
 let upload = multer({ dest: './uploads/' });
 let imgUrl = cloudinary.url('ivxhhdczxofx3rtze0cg', {width: 250, height: 250})
-
+const session = require('express-session')
+const passport = require('./config/ppConfig.js')
+const flash = require('connect-flash')
+const isLoggedIn = require('./middleware/isLoggedIn')
 
 //setup ejs and ejs layouts
 app.set('view engine', 'ejs')
@@ -16,8 +19,12 @@ app.use(express.urlencoded({extended: false}))
 cloudinary.config(process.env.CLOUDINARY_URL)
 
 
-
-
+app.use(session({
+    secret: 'keyboard cat',
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+}))
 
 
 app.get('/', function(req, res) {
