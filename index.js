@@ -52,6 +52,9 @@ app.post ('/saveCat', async (req, res)=>{
     const id = req.body.categoryId;
     const {name, data} = req.files.myFile;
     const fn = "images/cat_"+id+"_"+name;
+    const nmName = req.body.name;
+    const date = req.body.date;
+    const title = req.body.title;
     fs.writeFileSync("public/"+fn, data);
 //find a way to store cloudinary image under category
     db.category_images.create({
@@ -60,7 +63,7 @@ app.post ('/saveCat', async (req, res)=>{
         bytes: data
     }).then (
       //  cloudinary.uploader.upload(req.files.path, function(result) {});
-        res.render('uploaded', {img: fn, categoryId: id})
+        res.render('uploaded', {img: fn, categoryId: id, name: nmName, date: date, title: title})
      );
 });
 
@@ -123,6 +126,10 @@ app.get('/category/:id', (req, res)=>{
 app.get('/profile', isLoggedIn, (req, res)=>{
     res.render('profile')
 })
+
+app.put('/saveCat', function (req, res) {
+    res.send('Got a PUT request at /user')
+  })
 
 app.listen(process.env.PORT, ()=>{
     console.log('you\'re listening to the spooky sounds of port 3000')
