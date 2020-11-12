@@ -1,8 +1,20 @@
+<html>
+<title>Home</title>
+<head>
+  <script>
+    function openMail()
+    {
+      window.location.replace("new-mail");
+    }
+  </script>
+</head>
 <h1>Hellooooo home page</h1>
 
-<form enctype="multipart/form-data" action="/" method="POST">
+<!-- <form enctype="multipart/form-data" action="/" method="POST">
     <input type="file" name="myFile">
     <input type="submit" class="btn btn-primary">
-  </form>
+  </form> -->
 
-  <img src="<%= image %>" alt="A picture">
+  <!-- <img src="<%= image %>" alt="A picture"> -->
+
+  <button class="new-mail-btn" onClick="openMail()">New Mail</button>

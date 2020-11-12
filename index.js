@@ -6,16 +6,19 @@ let cloudinary = require('cloudinary');
 let multer = require('multer');
 const db = require('./models/index.js');
 let upload = multer({ dest: './uploads/' });
+var uploadFile = require("express-fileupload");
 let imgUrl = cloudinary.url('ivxhhdczxofx3rtze0cg', {width: 250, height: 250})
 const session = require('express-session')
 const passport = require('./config/ppConfig.js')
 const flash = require('connect-flash')
 const isLoggedIn = require('./middleware/isLoggedIn')
-
+const fs = require('fs');
 //setup ejs and ejs layouts
 app.set('view engine', 'ejs')
 app.use(ejsLayouts) 
+app.use(express.static("public"));
 app.use(express.urlencoded({extended: false}))
+app.use(uploadFile());
 cloudinary.config(process.env.CLOUDINARY_URL)
 
 
@@ -28,7 +31,7 @@ app.use(session({
 // passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
-
+app.use(express.static(__dirname + '/public'));
 // flash middleware
 app.use(flash())
 
@@ -45,13 +48,28 @@ app.get('/', function(req, res) {
     res.render('home', { image: imgUrl });
   });
 
+app.post ('/saveCat', async (req, res)=>{
+    const id = req.body.categoryId;
+    const {name, data} = req.files.myFile;
+    const fn = "images/cat_"+id+"_"+name;
+    fs.writeFileSync("public/"+fn, data);
+//find a way to store cloudinary image under category
+    db.category_images.create({
+        category_id: id,
+        file_name: name,
+        bytes: data
+    }).then (
+      //  cloudinary.uploader.upload(req.files.path, function(result) {});
+        res.render('uploaded', {img: fn, categoryId: id})
+     );
+});
 
 // cloudinary post route
-app.post('/', upload.single('myFile'), function(req, res) {
-  cloudinary.uploader.upload(req.file.path, function(result) {
+app.post('/cloud', upload.single('myFile'), function(req, res) {
+  cloudinary.uploader.upload(req.files.path, function(result) {
     // res.send(result.url);
     imgUrl = result.url
-    db.mail.findOrCreate({
+    db.mails.findOrCreate({
         where: {
             url: result.url
         },
@@ -68,37 +86,23 @@ app.post('/', upload.single('myFile'), function(req, res) {
     });
 });
 
-//controllers midware. This is what allows us to use the controllers routes
+//controllers middleware. This is what allows us to use the controllers routes
 app.use('/auth', require('./controllers/auth.js'))
 app.get('/', (req, res)=>{
     // res.send('EXPRESS AUTH HOME ROUTE')
-    res.render('home')
+    res.render('home');
 })
 
-// THIS ROUTE WILL BE FOR CATEGORIZED MAIL ONCE WE GET CLOUDINARY TO STOP PLAYIN
-// app.get('/', (req, res)=>{
-//     // res.send('EXPRESS AUTH HOME ROUTE')
-//     res.render('category')
-// })
-
-//============================
-
-
-// app.get('/', (req, res)=>{
-//     db.category.findAll()
-//     .then((categories)=>{
-//         //render to category index, pass in category in the route
-//         res.render('categories/index', {categories: categories})
-//     })
-//     .catch(err =>{
-//         console.log(err)
-//     })
-// })
+//new mail route
+app.get('/new-mail',  (req, res)=>{
+    db.category.findAll().then (function(rows){
+        res.render('new-mail', {categories: rows});
+    });
+})
 
 app.get('/category/:id', (req, res)=>{
     // res.send('hellooooooooo')
     // console.log(req.params.id)
-    console.log(mailStorage)
     db.category.findOrCreate({ //make findOrCreate to give 
         where: {id: req.params.id} 
         // include: [db.mails]
@@ -120,8 +124,6 @@ app.get('/profile', isLoggedIn, (req, res)=>{
     res.render('profile')
 })
 
-
-//============================
 app.listen(process.env.PORT, ()=>{
     console.log('you\'re listening to the spooky sounds of port 3000')
 })

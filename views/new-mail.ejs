@@ -1,0 +1,41 @@
+<html>
+  <title>Home</title>
+  <head>
+    <script>
+      const pages =['home', 'profile'];
+      function categorySelect(sel)
+      {
+        // alert(sel.value);
+        document.getElementById("categoryId").value=sel.value;
+      }
+      </script>
+</head>
+<body>
+  <h2>HTML Forms</h2>
+  <form method='post' action="/saveCat"></form>
+  <form method="post" action="/saveCat" enctype="multipart/form-data"><br>
+    Categories: <br>
+    <select name="categories" onChange = "categorySelect(this)">
+      <% categories.forEach(element => {%>
+        <option value="<%=element.id%>"><%=element.categoryName%></option>
+        <%})%>
+      </select>
+      <input type="hidden" id="categoryId" name="categoryId" value="1"/>
+      <input type="file" name="myFile"/><br>
+      
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name" value="Name"><br>
+      
+      <label for="date">Date:</label><br>
+      <input type="text" id="date" name="date" value="Date"><br>
+      
+      <label for="Title">Title:</label><br>
+      <input type="text" id="title" name="title" value="Title"><br><br>
+      <input type="submit"/><br>
+    </form>
+ 
+  </form> 
+</body>
+</html>
+</body>
+
