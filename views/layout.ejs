@@ -3,25 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>818 Express Auth</title>
     <link href="/css/style.css" rel="stylesheet" type="text/css">
-</head>
-<body>
+    <title>Mail Direct!</title>
     <header>
-        <h1>818 Express Auth</h1>
+        <h1 class="opening-title">Welcome to Mail Direct</h1>
         <nav>
-            <ul>
+            
                 <% if (!currentUser) {%>
-                    <li><a href="/auth/signup">Sign Up</a></li>
-                    <li><a href="/auth/login">Log In</a></li>
+            <div class="navbar-container">
+                <div class="navbar-su">
+                    <a href="/auth/signup">Sign Up</a>
+                </div>
+                <div class="navbar-login"></div>
+                    <a href="/auth/login">Log In</a>
+                </div>
+            </div>
                 <% } else { %>
-                    <li><a href="/auth/logout">Log Out</a></li>
-                    <li><a href="/profile">Profile</a></li>
+        <div class="logged-in-page">
+            <div class="logout">
+                <a href="/auth/logout">Log Out</a>
+            </div>
+            <div class="profile">
+                <a href="/profile">Profile</a>
+            </div>
+        </div>   
                 <% } %> 
-            </ul>
+            
         </nav>
     </header>
     <%- include('partials/alerts.ejs') %> 
     <%- body %>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>    
 </body>
 </html>

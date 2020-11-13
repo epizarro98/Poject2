@@ -1,17 +1,20 @@
-<h2>Signup</h2>
+<h2 class="signup">Signup</h2>
 
 <form method="POST" action="/auth/signup">
+    <div class="form-group">
     <label for="new-name">Name</label>
-    <input type="text" name="name" id="new-name">
+    <input type="text" name="name" class="form-control" placeholder="Enter Name" id="new-name">
+</div>
 
-
+<div class="form-group">
     <label for="new-name">Email</label>
-    <input type="email" name="email" id="new-email">
+    <input type="email" name="email" class="form-control" placeholder="Enter Email" id="new-email">
+</div>
 
-
+<div class="form-group"></div>
     <label for="new-password">Password</label>
-    <input type="password" name="password" id="new-password">
+    <input type="password" name="password" class="form-control" placeholder="Enter Password" id="new-password"><br>
+</div>
 
     <input type="submit" value="Sign up">
-
-</form>
+  </form>

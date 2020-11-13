@@ -49,14 +49,6 @@ app.get('/', function(req, res) {
     res.render('home', { image: imgUrl });
   });
 
-
-// app.post('/cloud', (req,res)=>{
-//     upload(req, res, function(err){
-//         console.log(req.body)
-//         console.log(req.file)
-//     })
-// })
-
 // cloudinary post route
 app.post('/cloud', upload, function(req, res) {
     cloudinary.uploader.upload(req.file.path, function(result) {
@@ -73,7 +65,7 @@ app.post('/cloud', upload, function(req, res) {
         }).then((mail)=>{
             console.log('🧽')
             console.log(mail.get())
-            res.redirect('/profile')
+            res.render('profile', {mail: mail})
         }).catch(err =>{
             console.log('🛎', err)
         })
@@ -95,19 +87,17 @@ app.get('/new-mail',  (req, res)=>{
 })
 
 app.get('/category/:id', (req, res)=>{
-    // res.send('hellooooooooo')
-    // console.log(req.params.id)
-    db.category.findOrCreate({ //make findOrCreate to give 
-        where: {id: req.params.id} 
-        // include: [db.mails]
+    db.category.findOne({//finding one category
+        where: {id: req.params.id},//category has to have id that matches url, has to match the id. req params is telling it to look for the id 
     })
-    .then((category)=>{
-        //render category show page, pass in category to res.render in the show page
-        // if (!category) {
-        //     res.redirect('/')
-        // }
-        res.render('category', {category: category, mails: category.mails})
-        // res.send('hello')
+    .then((category)=>{//then means now what, since i have this category what do i do with it?
+        console.log('i found the category')//was this console log found? did it reach it? if the consolelog doesnt show that means it didnt reach it
+        db.mail.findAll({//go through my mail model/db and find all the things in it
+            where: {categoryId: category.id}// this line you are looking for the mail that gas a category id that matches the id of the category i just found
+        })
+        .then(mails=>{//since i have all this mail, now what? 
+        res.render('category', {category: category, mails: mails})//go show the category page, and send all of this information with it and give it access.
+        })
     })
     .catch(err =>{
         console.log('THIS IS THE ERROR<================', err)
@@ -118,9 +108,38 @@ app.get('/profile', isLoggedIn, (req, res)=>{
     res.render('profile')
 })
 
-app.put('/saveCat', function (req, res) {
-    res.send('Got a PUT request at /user')
-  })
+
+//delete route
+app.delete('/:id', (req, res)=>{
+    db.mail.destroy({
+        where: {id: req.params.id}
+    })
+    .then((numRowsDeleted)=>{
+        console.log(numRowsDeleted)
+          res.redirect('/')
+        })
+        .catch(err => {
+            console.log(err)
+        })
+})
+
+//edit route
+app.put('/:id', (req, res)=>{
+    db.mail.update({
+    title: req.body.title
+    },
+    {where:{userId: req.user.id, 
+            categoryId: req.params.id}
+})
+.then(titleUpdated=>{
+        console.log('🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪' ,titleUpdated)
+        res.redirect('/')
+})
+.catch(err=>{
+    res.send(err)
+    })      
+})
+
 
 app.listen(process.env.PORT, ()=>{
     console.log('you\'re listening to the spooky sounds of port 3000')

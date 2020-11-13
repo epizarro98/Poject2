@@ -1,3 +1,69 @@
 body{
     background-color: #7698a7;
 }
+
+img{
+    height:300px;
+    width: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+.opening-title{
+    text-align: center;
+}
+
+.navbar-container{
+    width: 100%;
+    background-color: rgb(155, 182, 146);
+    overflow: auto;
+    float: left;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    display: inline-flex;
+}
+
+.navbar-login{
+    margin: 10px;
+}
+
+.navbar-su{
+    display: flex;
+    justify-self: center;
+}
+
+input[type=text], input[type=password],input[type=email] {
+    width: 98%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+.category-list{
+    text-align: center;
+}
+
+.logged-in-page{
+    width: 100%;
+    background-color: rgb(155, 182, 146);
+    overflow: auto;
+    float: left;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    display: inline-flex;
+}
+
+.logout{
+    margin: 10px;
+}
