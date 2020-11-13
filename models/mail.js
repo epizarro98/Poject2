@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.mail.belongsTo(models.user)
+      models.mail.belongsTo(models.category)
     }
   };
   mail.init({

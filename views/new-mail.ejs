@@ -12,16 +12,13 @@
 </head>
 <body>
   <h2>HTML Forms</h2>
-  <form method='post' action="/saveCat"></form>
-  <form method="post" action="/saveCat" enctype="multipart/form-data"><br>
+  <form method="post" action="/cloud" enctype="multipart/form-data"><br>
     Categories: <br>
-    <select name="categories" onChange = "categorySelect(this)">
+    <select name="category" onChange = "categorySelect(this)">
       <% categories.forEach(element => {%>
         <option value="<%=element.id%>"><%=element.categoryName%></option>
         <%})%>
       </select>
-      <input type="hidden" id="categoryId" name="categoryId" value="1"/>
-      <input type="file" name="myFile"/><br>
       
       <label for="name">Name:</label><br>
       <input type="text" id="name" name="name" value="Name"><br>
@@ -31,8 +28,8 @@
       
       <label for="Title">Title:</label><br>
       <input type="text" id="title" name="title" value="Title"><br><br>
+      <input type="file" name="myFile"/><br>
       <input type="submit"/><br>
-    </form>
  
   </form> 
 </body>

@@ -4,8 +4,8 @@ const app = express()
 const ejsLayouts = require('express-ejs-layouts')
 let cloudinary = require('cloudinary');
 let multer = require('multer');
-const db = require('./models/index.js');
-let upload = multer({ dest: './uploads/' });
+const db = require('./models');
+let upload = multer({ dest: './uploads/' }).single('myFile');
 var uploadFile = require("express-fileupload");
 let imgUrl = cloudinary.url('ivxhhdczxofx3rtze0cg', {width: 250, height: 250})
 const session = require('express-session')
@@ -13,12 +13,13 @@ const passport = require('./config/ppConfig.js')
 const flash = require('connect-flash')
 const isLoggedIn = require('./middleware/isLoggedIn')
 const fs = require('fs');
+const { url } = require('inspector');
 //setup ejs and ejs layouts
 app.set('view engine', 'ejs')
 app.use(ejsLayouts) 
 app.use(express.static("public"));
 app.use(express.urlencoded({extended: false}))
-app.use(uploadFile());
+app.use(express.json())
 cloudinary.config(process.env.CLOUDINARY_URL)
 
 
@@ -48,47 +49,37 @@ app.get('/', function(req, res) {
     res.render('home', { image: imgUrl });
   });
 
-app.post ('/saveCat', async (req, res)=>{
-    const id = req.body.categoryId;
-    const {name, data} = req.files.myFile;
-    const fn = "images/cat_"+id+"_"+name;
-    const nmName = req.body.name;
-    const date = req.body.date;
-    const title = req.body.title;
-    fs.writeFileSync("public/"+fn, data);
-//find a way to store cloudinary image under category
-    db.category_images.create({
-        category_id: id,
-        file_name: name,
-        bytes: data
-    }).then (
-      //  cloudinary.uploader.upload(req.files.path, function(result) {});
-        res.render('uploaded', {img: fn, categoryId: id, name: nmName, date: date, title: title})
-     );
-});
+
+// app.post('/cloud', (req,res)=>{
+//     upload(req, res, function(err){
+//         console.log(req.body)
+//         console.log(req.file)
+//     })
+// })
 
 // cloudinary post route
-app.post('/cloud', upload.single('myFile'), function(req, res) {
-  cloudinary.uploader.upload(req.files.path, function(result) {
-    // res.send(result.url);
-    imgUrl = result.url
-    db.mails.findOrCreate({
-        where: {
-            url: result.url
-        },
-    }).then(([mail, created])=>{
-        db.user.findOne()
-        .then(user=>{
-            user.addMail(mail)
-            res.redirect('/')
-            })
-        .catch(err=>{
-            console.log(err, 'ERROR <=====================')
-            })
+app.post('/cloud', upload, function(req, res) {
+    cloudinary.uploader.upload(req.file.path, function(result) {
+        // res.send(result.url);
+        imgUrl = result.url
+        console.log(req.file)
+        console.log(req.body)
+        db.mail.create({ 
+            title: req.body.title,
+            date: req.body.date,
+            url: imgUrl,
+            categoryId: req.body.category,
+            userId: req.user.id
+        }).then((mail)=>{
+            console.log('🧽')
+            console.log(mail.get())
+            res.redirect('/profile')
+        }).catch(err =>{
+            console.log('🛎', err)
         })
-    });
+    }) 
 });
-
+            
 //controllers middleware. This is what allows us to use the controllers routes
 app.use('/auth', require('./controllers/auth.js'))
 app.get('/', (req, res)=>{
