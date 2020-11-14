@@ -11,25 +11,23 @@
       </script>
 </head>
 <body>
-  <h2>New Mail</h2>
+  <h2 class="new-mail-title">New Mail</h2>
   <form method="post" action="/cloud" enctype="multipart/form-data"><br>
     Categories: <br>
     <select name="category" onChange = "categorySelect(this)">
       <% categories.forEach(element => {%>
-        <option value="<%=element.id%>"><%=element.categoryName%></option>
+        <div class="drop-list"></div><option value="<%=element.id%>"><%=element.categoryName%></option></div>
         <%})%>
       </select><br>
-      <label for="name">Name:</label><br>
-      <input type="text" id="name" name="name" placeholder="Name"><br>
-      
-      <label for="date">Date:</label><br>
-      <input type="text" id="date" name="date" placeholder="Date"><br>
       
       <label for="Title">Title:</label><br>
       <input type="text" id="title" name="title" placeholder="Title"><br><br>
+      <label for="date">Date:</label><br>
+      <input type="text" id="date" name="date" placeholder="Date"><br>
+      
       <input type="file" name="myFile"/><br>
       <input type="submit"/><br>
-  </form> 
+  </form>
 </body>
 </html>
 </body>
