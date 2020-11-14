@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 body{
-    background-color: #7698a7;
+    background-color: #bce5e6;
 }
 
 img{
@@ -13,11 +14,12 @@ img{
 
 .opening-title{
     text-align: center;
+    font-family: 'Poppins', sans-serif;
 }
 
 .navbar-container{
     width: 100%;
-    background-color: rgb(155, 182, 146);
+    background-color: rgb(198, 198, 198);
     overflow: auto;
     float: left;
     padding: 12px;
@@ -25,15 +27,14 @@ img{
     text-decoration: none;
     font-size: 17px;
     display: inline-flex;
+    font-family: 'Poppins', sans-serif;
 }
 
-.navbar-login{
-    margin: 10px;
-}
 
 .navbar-su{
     display: flex;
     justify-self: center;
+    font-family: 'Poppins', sans-serif;
 }
 
 input[type=text], input[type=password],input[type=email] {
@@ -46,15 +47,21 @@ input[type=text], input[type=password],input[type=email] {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Poppins', sans-serif;
   }
 
 .category-list{
     text-align: center;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 39px;
 }
 
 .logged-in-page{
     width: 100%;
-    background-color: rgb(155, 182, 146);
+    background-color: rgb(159, 159, 159);
     overflow: auto;
     float: left;
     padding: 12px;
@@ -62,8 +69,54 @@ input[type=text], input[type=password],input[type=email] {
     text-decoration: none;
     font-size: 17px;
     display: inline-flex;
+    font-family: 'Poppins', sans-serif;
+
 }
 
-.logout{
-    margin: 10px;
+.profile{
+    margin-left: 15px;
+}
+
+.navbar-login{
+    margin-left: 15px;
+}
+
+.inbox{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.new-mail-btn{
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #1400f5;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    background-color: #015eff;
+    box-shadow: 0 5px rgb(119, 116, 116);
+    transform: translateY(4px);
+}
+
+.cat-name{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    text-transform: capitalize;
+    font-weight: 150px;
+    font-size: 30px;
+}
+
+.mail-title{
+    text-align: center;
+    font-size: 22px;
+}
+
+.home-nav{
+    margin-left: 15px;
 }

@@ -18,20 +18,17 @@
       <% categories.forEach(element => {%>
         <option value="<%=element.id%>"><%=element.categoryName%></option>
         <%})%>
-      </select>
-      
+      </select><br>
       <label for="name">Name:</label><br>
-      <input type="text" id="name" name="name" value="Name"><br>
+      <input type="text" id="name" name="name" placeholder="Name"><br>
       
       <label for="date">Date:</label><br>
-      <input type="text" id="date" name="date" value="Date"><br>
+      <input type="text" id="date" name="date" placeholder="Date"><br>
       
       <label for="Title">Title:</label><br>
-      <input type="text" id="title" name="title" value="Title"><br><br>
+      <input type="text" id="title" name="title" placeholder="Title"><br><br>
       <input type="file" name="myFile"/><br>
       <input type="submit"/><br>
-      <a href="/">← Go Home</a>
- 
   </form> 
 </body>
 </html>

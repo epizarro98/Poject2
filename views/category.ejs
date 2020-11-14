@@ -1,18 +1,18 @@
-<p class="categoty-list"><%=category.categoryName%></p>
+<div class="cat-name"><p><%=category.categoryName%>:</p></div>
 
 <% mails.forEach(mail => { %>
+       <div class="mail-title">Title: <%= mail.title %></div>
         <img src="<%=mail.url%>">
-        <%= mail.title %>
-        <form method="POST" action="/category/<%=mail.id%>/?_method=DELETE">
+        <form method="POST" action="/mail/<%=mail.id%>/?_method=DELETE">
             <input type="submit" value="Delete">
         </form>
         
         
-        <form method="POST" action="/category/<%=mail.id%>/?_method=PUT">
-            <label for="content">Edit</label>
-            <textarea type="text" id="content" name="comment"></textarea>
+        <form method="POST" action="/mail/<%=mail.id%>/?_method=PUT">
+            <label for="title">Edit Title of Mail</label>
+            <input type="text" value="<%=mail.title%>" id="title" name="title">
             <br>
-            <input type="submit" value = "Edit">
+
             <input type="submit" value = "Submit">
         </form>
         <% }) %>

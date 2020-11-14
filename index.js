@@ -14,12 +14,15 @@ const flash = require('connect-flash')
 const isLoggedIn = require('./middleware/isLoggedIn')
 const fs = require('fs');
 const { url } = require('inspector');
+const methodOverride = require('method-override');
 //setup ejs and ejs layouts
 app.set('view engine', 'ejs')
 app.use(ejsLayouts) 
 app.use(express.static("public"));
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
+app.use(methodOverride('_method'));
+
 cloudinary.config(process.env.CLOUDINARY_URL)
 
 
@@ -105,9 +108,8 @@ app.get('/category/:id', (req, res)=>{
 })
 
 app.get('/profile', isLoggedIn, (req, res)=>{
-    res.render('profile')
+    res.render('category')
 })
-
 
 //delete route
 app.delete('/:id', (req, res)=>{
