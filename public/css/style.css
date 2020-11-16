@@ -1,6 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Belleza&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Capriola&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Capriola&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Capriola&display=swap");
+
 body {
-  background-color: #bce5e6;
+  background-image: url("../images/blueish.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 img {
@@ -15,11 +23,14 @@ img {
 .opening-title {
   text-align: center;
   font-family: "Poppins", sans-serif;
+  font-size: 50px;
+  font-weight: 100px;
+  font-family: "Belleza", sans-serif;
 }
 
 .navbar-container {
   width: 100%;
-  background-color: rgb(198, 198, 198);
+  background-color: rgb(226, 221, 199);
   overflow: auto;
   float: left;
   padding: 12px;
@@ -84,7 +95,8 @@ input[type="email"] {
 
 .inbox {
   text-align: center;
-  font-family: "Poppins", sans-serif;
+  font-family: "Capriola", sans-serif;
+  margin-top: 10px;
 }
 
 .new-mail-btn {
@@ -99,24 +111,23 @@ input[type="email"] {
   background-color: #1400f5;
   border: none;
   border-radius: 15px;
-  box-shadow: 0 9px #999;
   background-color: #015eff;
-  box-shadow: 0 5px rgb(119, 116, 116);
   transform: translateY(4px);
   align-items: center;
 }
 
 .cat-name {
   text-align: center;
-  font-family: "Poppins", sans-serif;
+  font-family: "Capriola", sans-serif;
   text-transform: capitalize;
   font-weight: 150px;
-  font-size: 30px;
+  font-size: 32px;
 }
 
 .mail-title {
   text-align: center;
   font-size: 22px;
+  font-family: "Capriola", sans-serif;
 }
 
 .home-nav {
@@ -124,8 +135,8 @@ input[type="email"] {
 }
 .new-mail-title {
   text-align: center;
-  font-family: "Poppins", sans-serif;
-  font-size: 26px;
+  font-size: 30px;
+  font-family: "Capriola", sans-serif;
 }
 
 .drop-list {
@@ -133,9 +144,21 @@ input[type="email"] {
 }
 
 input[type="submit"] {
-  background: rgb(66, 184, 221);
+  background: rgb(198, 255, 250);
   height: 30px;
   width: 150px;
   border-radius: 20px;
   margin-top: 15px;
+}
+
+.container {
+  font-size: 25px;
+}
+
+.login-signup {
+  text-align: center;
+}
+
+.edit {
+  font-family: "Poppins", sans-serif;
 }

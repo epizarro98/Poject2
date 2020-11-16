@@ -2,8 +2,8 @@
 
 <% mails.forEach(mail => { %>
 <div class="mail-title">
-  Title: <%= mail.title %> <br />
-  Date: <%= mail.date %>
+  <b>Title:</b> <%= mail.title %> <br />
+  <b>Date:</b> <%= mail.date %>
 </div>
 <img src="<%=mail.url%>" />
 <form method="POST" action="/<%=mail.id%>/?_method=DELETE">
@@ -11,10 +11,9 @@
 </form>
 
 <form method="POST" action="/<%=mail.id%>/?_method=PUT">
-  <label for="title">Edit Title of Mail</label>
+  <input type="submit" value="Submit" /><br /><br />
+  <div class="edit"><label for="title">Edit Title of Mail:</label></div>
   <input type="text" value="<%=mail.title%>" id="title" name="title" />
   <br />
-
-  <input type="submit" value="Submit" />
 </form>
 <% }) %>
