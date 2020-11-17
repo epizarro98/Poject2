@@ -57,7 +57,7 @@ app.get("/", function (req, res) {
 });
 
 // cloudinary post route
-app.post("/cloud", upload, function (req, res) {
+app.post("/cloud", upload, isLoggedIn, function (req, res) {
   cloudinary.uploader.upload(req.file.path, function (result) {
     // res.send(result.url);
     imgUrl = result.url;
@@ -90,13 +90,13 @@ app.get("/", (req, res) => {
 });
 
 //new mail route
-app.get("/new-mail", (req, res) => {
+app.get("/new-mail", isLoggedIn, (req, res) => {
   db.category.findAll().then(function (rows) {
     res.render("new-mail", { categories: rows });
   });
 });
 
-app.get("/category/:id", (req, res) => {
+app.get("/category/:id", isLoggedIn, (req, res) => {
   db.category
     .findOne({
       //finding one category
@@ -125,7 +125,7 @@ app.get("/profile", isLoggedIn, (req, res) => {
 });
 
 //delete route
-app.delete("/:id", (req, res) => {
+app.delete("/:id", isLoggedIn, (req, res) => {
   console.log("@@@@@@@@@", req.params);
   db.mail
     .destroy({
@@ -141,7 +141,7 @@ app.delete("/:id", (req, res) => {
 });
 
 //edit route
-app.put("/:id", (req, res) => {
+app.put("/:id", isLoggedIn, (req, res) => {
   db.mail
     .update(
       { title: req.body.title },

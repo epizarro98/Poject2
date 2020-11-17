@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Capriola&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Capriola&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Capriola&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap");
 
 body {
   background-image: url("../images/blueish.png");
@@ -26,6 +27,8 @@ img {
   font-size: 50px;
   font-weight: 100px;
   font-family: "Belleza", sans-serif;
+  color: white;
+  font-family: "Rubik", sans-serif;
 }
 
 .navbar-container {
@@ -97,23 +100,21 @@ input[type="email"] {
   text-align: center;
   font-family: "Capriola", sans-serif;
   margin-top: 10px;
+  color: white;
 }
 
 .new-mail-btn {
-  display: inline-block;
   padding: 15px 25px;
   font-size: 24px;
   cursor: pointer;
-  text-align: center;
-  text-decoration: none;
   outline: none;
   color: #fff;
   background-color: #1400f5;
   border: none;
   border-radius: 15px;
-  background-color: #015eff;
-  transform: translateY(4px);
-  align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .cat-name {
@@ -122,12 +123,14 @@ input[type="email"] {
   text-transform: capitalize;
   font-weight: 150px;
   font-size: 32px;
+  color: white;
 }
 
 .mail-title {
   text-align: center;
   font-size: 22px;
   font-family: "Capriola", sans-serif;
+  color: white;
 }
 
 .home-nav {
@@ -137,6 +140,7 @@ input[type="email"] {
   text-align: center;
   font-size: 30px;
   font-family: "Capriola", sans-serif;
+  color: white;
 }
 
 .drop-list {
@@ -153,12 +157,34 @@ input[type="submit"] {
 
 .container {
   font-size: 25px;
+  color: white;
 }
 
 .login-signup {
   text-align: center;
+  color: white;
 }
 
 .edit {
   font-family: "Poppins", sans-serif;
+  color: white;
+}
+
+.profile-title-date {
+  text-align: center;
+  font-size: 30px;
+  font-family: "Capriola", sans-serif;
+  color: white;
+}
+
+.profile-name {
+  text-align: center;
+  font-size: 30px;
+  font-family: "Capriola", sans-serif;
+  color: white;
+  text-transform: capitalize;
+}
+
+.uncategorized {
+  color: white;
 }
