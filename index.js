@@ -85,7 +85,6 @@ app.post("/cloud", upload, isLoggedIn, function (req, res) {
 //controllers middleware. This is what allows us to use the controllers routes
 app.use("/auth", require("./controllers/auth.js"));
 app.get("/", (req, res) => {
-  // res.send('EXPRESS AUTH HOME ROUTE')
   res.render("home");
 });
 
@@ -99,20 +98,17 @@ app.get("/new-mail", isLoggedIn, (req, res) => {
 app.get("/category/:id", isLoggedIn, (req, res) => {
   db.category
     .findOne({
-      //finding one category
-      where: { id: req.params.id }, //category has to have id that matches url, has to match the id. req params is telling it to look for the id
+      where: { id: req.params.id },
     })
     .then((category) => {
-      //then means now what, since i have this category what do i do with it?
-      console.log("i found the category"); //was this console log found? did it reach it? if the consolelog doesnt show that means it didnt reach it
+      console.log("i found the category");
       db.mail
         .findAll({
-          //go through my mail model/db and find all the things in it
-          where: { categoryId: category.id }, // this line you are looking for the mail that gas a category id that matches the id of the category i just found
+          where: { categoryId: category.id },
         })
         .then((mails) => {
           //since i have all this mail, now what?
-          res.render("category", { category: category, mails: mails }); //go show the category page, and send all of this information with it and give it access.
+          res.render("category", { category: category, mails: mails });
         });
     })
     .catch((err) => {
@@ -143,11 +139,7 @@ app.delete("/:id", isLoggedIn, (req, res) => {
 //edit route
 app.put("/:id", isLoggedIn, (req, res) => {
   db.mail
-    .update(
-      { title: req.body.title },
-      //where: { userId: req.user.dataValues.id, categoryId: req.params.id },
-      { where: { id: req.params.id } }
-    )
+    .update({ title: req.body.title }, { where: { id: req.params.id } })
     .then((titleUpdated) => {
       console.log("🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪", titleUpdated);
       res.redirect("/");

@@ -172,14 +172,14 @@ input[type="submit"] {
 .profile-title-date {
   text-align: center;
   font-size: 30px;
-  font-family: "Capriola", sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: white;
 }
 
 .profile-name {
   text-align: center;
   font-size: 30px;
-  font-family: "Capriola", sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: white;
   text-transform: capitalize;
 }
