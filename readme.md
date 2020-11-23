@@ -2,6 +2,9 @@
 
 Mail Direct is an app where you can store images and a detailed explanation of mail that comes in the mail.
 
+## Link to site
+https://mail-direct.herokuapp.com/
+
 ## Technologies Used
 
 - Bootstrap
